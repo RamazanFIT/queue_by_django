@@ -26,8 +26,7 @@ def add_news(request):
         return redirect(reverse("news:info_news", kwargs={"news_id": news.id}))
     elif request.method == "GET":
         return render(request, "news/add_news.html")
-    
-    
+     
 def get_all_news(request):
     news = News.objects.order_by("-created_at").all()
     return render(request, "news/get_all_news.html", {"news" : news})

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Information about news</title>
+</head>
+
+<body>
+        <a href="{% url 'news:all_news' %}">
+            Back
+        </a>
+        <br>
+        Information about news
+        title:
+        <br>
+        {{news.title}}
+        <br>
+        <br>
+        content:
+        <br>
+        {{news.content}}
+        <br>
+        <br>
+        created at:
+        <br>
+        {{news.created_at}}
+        <br><br>
+        <form action="{% url 'news:info_news' news.id %}" method="post">
+            {% csrf_token %}
+            <input type="text" name="content" required>
+            <input type="submit" value="Add comment">
+
+        </form>
+        <br>
+        {% for comment in comments %}
+        <li>
+            Comment: {{comment.content}}
+            <br>
+            Created at: {{comment.created_at}}
+            <br><br>
+        </li>
+        {% endfor %}
+    
+</body>
+
+</html>

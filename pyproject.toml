@@ -1,0 +1,16 @@
+[tool.poetry]
+name = "django-2-ramazanfit"
+version = "0.1.0"
+description = ""
+authors = ["Ramazan <syrlybai056@gmail.com>"]
+readme = "README.md"
+packages = [{include = "django_2_ramazanfit"}]
+
+[tool.poetry.dependencies]
+python = "^3.11"
+django = "^4.2.4"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

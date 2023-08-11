@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Add news</title>
+</head>
+
+<body>
+    <form action = "{% url 'news:interface_adding'%}" method="post">
+        {% csrf_token %}
+        Add news
+        title:
+        <br>
+        <input type="text" name="title" required>
+        <br>
+        <br>
+        content:
+        <br>
+        <input type="text" name="content" required>
+        <br>
+        <br>
+        <input type="submit" value="Add">
+    </form>
+</body>
+
+</html>

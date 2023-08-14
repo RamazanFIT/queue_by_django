@@ -3,23 +3,62 @@
 
 <head>
     <title>NEWS</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 2rem;
+            background-color: white;
+            box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+            border-radius: 5px;
+        }
+
+        a {
+            text-decoration: none;
+            color: #333;
+            transition: color 0.3s ease;
+        }
+
+        a:hover {
+            color: #666;
+        }
+
+        ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        li {
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            padding: 1rem;
+            margin-bottom: 1rem;
+            background-color: #f9f9f9;
+        }
+    </style>
 </head>
 
 <body>
-
-    <a href="{% url 'news:main' %}">
-        Back
-    </a> <br>
-        Список всех новостей:
-        <br>
-    {% for new in news %}
-    <li>
-        <a href="{% url 'news:info_news' new.id %}">
-            {{ new.title }}
-        </a>
-    </li>
-    {% endfor %}
-    
+    <div class="container">
+        <a href="{% url 'news:main' %}">Back</a>
+        <h1>Список всех новостей:</h1>
+        <ul>
+            {% for new in news %}
+            <li>
+                <a href="{% url 'news:info_news' new.id %}">
+                    {{ new.title }}
+                </a>
+            </li>
+            {% endfor %}
+        </ul>
+    </div>
 </body>
 
 </html>

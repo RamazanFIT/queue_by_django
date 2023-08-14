@@ -3,24 +3,86 @@
 
 <head>
     <title>Add news</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+
+        .container {
+            max-width: 400px;
+            margin: 0 auto;
+            padding: 2rem;
+            background-color: white;
+            box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+            border-radius: 5px;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+
+        label {
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+        }
+
+        input[type="text"] {
+            padding: 0.5rem;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+            margin-bottom: 1rem;
+        }
+
+        .back-button {
+            background-color: #333;
+            color: white;
+            padding: 0.5rem 1rem;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+            margin-bottom: 1rem;
+        }
+
+        .back-button:hover {
+            background-color: #444;
+        }
+
+        input[type="submit"] {
+            background-color: #333;
+            color: white;
+            padding: 0.5rem 1rem;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #444;
+        }
+    </style>
 </head>
 
 <body>
-    <form action = "{% url 'news:interface_adding'%}" method="post">
-        {% csrf_token %}
-        Add news
-        title:
-        <br>
-        <input type="text" name="title" required>
-        <br>
-        <br>
-        content:
-        <br>
-        <input type="text" name="content" required>
-        <br>
-        <br>
-        <input type="submit" value="Add">
-    </form>
+    <div class="container">
+        <a class="back-button" href="{% url 'news:main' %}">Back</a>
+        <form action="{% url 'news:interface_adding' %}" method="post">
+            {% csrf_token %}
+            <h1>Add news</h1>
+            <label for="title">Title:</label>
+            <input type="text" id="title" name="title" required>
+            <label for="content">Content:</label>
+            <input type="text" id="content" name="content" required>
+            <input type="submit" value="Add">
+        </form>
+    </div>
 </body>
 
 </html>

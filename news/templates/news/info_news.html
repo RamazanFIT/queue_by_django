@@ -1,104 +1,48 @@
-<!DOCTYPE html>
-<html>
+{% extends "news/base.html" %}
 
-<head>
-    <title>Information about news</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #f4f4f4;
-        }
+{% block title %} 
 
-        .container {
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 2rem;
-            background-color: white;
-            box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
-            border-radius: 5px;
-        }
+    Information about news
 
-        a {
-            text-decoration: none;
-            color: #333;
-            transition: color 0.3s ease;
-        }
+{% endblock %}
 
-        a:hover {
-            color: #666;
-        }
+{% block header %}
 
-        form {
-            margin-top: 1rem;
-            display: flex;
-            align-items: center;
-        }
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'news/css/style_info_news.css' %}">
+    
+{% endblock %}
 
-        input[type="text"] {
-            padding: 0.5rem;
-            border: 1px solid #ccc;
-            border-radius: 3px;
-            flex-grow: 1;
-        }
+{% block content %} 
+    
+    <a href="{% url 'news:all_news' %}">Back</a>
+    <br>
+    <a href="{% url 'news:change_data_of_news' news.id %}">Изменить новость</a>
+    <h1>Information about news</h1>
+    <h2>Title:</h2>
+    <p>{{news.title}}</p>
+    <h2>Content:</h2>
+    <p>{{news.content}}</p>
+    <h2>Created at:</h2>
+    <p>{{news.created_at}}</p>
 
-        input[type="submit"] {
-            background-color: #333;
-            color: white;
-            padding: 0.5rem 1rem;
-            border: none;
-            border-radius: 3px;
-            cursor: pointer;
-            transition: background-color 0.3s ease;
-        }
+    <form action="{% url 'news:info_news' news.id %}" method="post">
+        {% csrf_token %}
+        <input type="text" name="content" placeholder="Add a comment..." required>
+        <input type="submit" value="Add comment">
+    </form>
 
-        input[type="submit"]:hover {
-            background-color: #444;
-        }
+    <h2>Comments:</h2>
+    <ul>
+        {% for comment in comments %}
+        <li>
+            <p>Comment: {{comment.content}}</p>
+            <p>Created at: {{comment.created_at}}</p>
+        </li>
+        {% endfor %}
+    </ul>
 
-        ul {
-            list-style: none;
-            padding: 0;
-        }
+{% endblock %}
 
-        li {
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            padding: 1rem;
-            margin-bottom: 1rem;
-            background-color: #f9f9f9;
-        }
-    </style>
-</head>
 
-<body>
-    <div class="container">
-        <a href="{% url 'news:all_news' %}">Back</a>
-        <h1>Information about news</h1>
-        <h2>Title:</h2>
-        <p>{{news.title}}</p>
-        <h2>Content:</h2>
-        <p>{{news.content}}</p>
-        <h2>Created at:</h2>
-        <p>{{news.created_at}}</p>
 
-        <form action="{% url 'news:info_news' news.id %}" method="post">
-            {% csrf_token %}
-            <input type="text" name="content" placeholder="Add a comment..." required>
-            <input type="submit" value="Add comment">
-        </form>
-
-        <h2>Comments:</h2>
-        <ul>
-            {% for comment in comments %}
-            <li>
-                <p>Comment: {{comment.content}}</p>
-                <p>Created at: {{comment.created_at}}</p>
-            </li>
-            {% endfor %}
-        </ul>
-    </div>
-</body>
-
-</html>

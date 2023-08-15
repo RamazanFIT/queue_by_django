@@ -1,64 +1,32 @@
-<!DOCTYPE html>
-<html>
+{% extends "news/base.html" %}
 
-<head>
-    <title>NEWS</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #f4f4f4;
-        }
+{% block title %} 
 
-        .container {
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 2rem;
-            background-color: white;
-            box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
-            border-radius: 5px;
-        }
+    NEWS
 
-        a {
-            text-decoration: none;
-            color: #333;
-            transition: color 0.3s ease;
-        }
+{% endblock %}
 
-        a:hover {
-            color: #666;
-        }
+{% block header %}
 
-        ul {
-            list-style: none;
-            padding: 0;
-        }
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'news/css/style_get_all.css' %}">
+    
+{% endblock %}
 
-        li {
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            padding: 1rem;
-            margin-bottom: 1rem;
-            background-color: #f9f9f9;
-        }
-    </style>
-</head>
+{% block content %} 
+    
+    <a href="{% url 'news:main' %}">Back</a>
+    <h1>Список всех новостей:</h1>
+    <ul>
+        {% for new in news %}
+        <li>
+            <a href="{% url 'news:info_news' new.id %}">
+                {{ new.title }}
+            </a>
+        </li>
+        {% endfor %}
+    </ul>
 
-<body>
-    <div class="container">
-        <a href="{% url 'news:main' %}">Back</a>
-        <h1>Список всех новостей:</h1>
-        <ul>
-            {% for new in news %}
-            <li>
-                <a href="{% url 'news:info_news' new.id %}">
-                    {{ new.title }}
-                </a>
-            </li>
-            {% endfor %}
-        </ul>
-    </div>
-</body>
+{% endblock %}
 
-</html>
+

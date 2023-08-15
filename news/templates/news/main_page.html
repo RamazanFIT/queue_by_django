@@ -1,26 +1,32 @@
-<!DOCTYPE html>
-<html>
+{% extends "news/base.html" %}
 
-<head>
+{% block title %} 
+
+    Information about news
+
+{% endblock %}
+
+{% block header %}
+
     {% load static %}
     <link rel="stylesheet" type="text/css" href="{% static 'news/css/style.css' %}">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Information about news</title>
     
-</head>
+{% endblock %}
 
-<body>
-    <header>
-        <h1>Information about news</h1>
-    </header>
+{% block head %}
+
+    <h1>Information about news</h1>
+
+{% endblock %}
+
+{% block content %} 
     
-    <div class="container">
-        <ul class="nav-links">
-            <li><a href="{% url 'news:interface_adding' %}">Добавить новость</a></li>
-            <li><a href="{% url 'news:all_news' %}">Новости</a></li>
-        </ul>
-    </div>
-</body>
+    <ul class="nav-links">
+        <li><a href="{% url 'news:interface_adding' %}">Добавить новость</a></li>
+        <li><a href="{% url 'news:all_news' %}">Новости</a></li>
+    </ul>
 
-</html>
+{% endblock %}
+

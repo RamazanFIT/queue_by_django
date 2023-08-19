@@ -21,5 +21,6 @@ import debug_toolbar
 urlpatterns = [
     path('admin/', admin.site.urls),
     path("news/", include("news.urls")),
-    path("__debug__", include(debug_toolbar.urls))
+    path("", include("django.contrib.auth.urls")),
+    path("__debug__", include(debug_toolbar.urls)),
 ]

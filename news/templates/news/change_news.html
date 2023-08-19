@@ -1,30 +1,23 @@
 {% extends "news/base.html" %}
 
 {% block title %} 
-
-Change news
-
+Change News
 {% endblock %}
 
 {% block header %}
-
     {% load static %}
-    <link rel="stylesheet" type="text/css" href="{% static 'news/css/style_add_news.css' %}">
-    
+    <link rel="stylesheet" type="text/css" href="{% static 'news/css/style_for_change.css' %}">
 {% endblock %}
 
 {% block content %} 
-    
-    <a class="back-button" href="{% url 'news:all_news' %}">Back</a>
-    <form action="{% url 'news:change_data_of_news' news_id %}" method="post">
-        {% csrf_token %}
-        <h1>Change news</h1>
-        {{ news_change_form }}
-        
-        <input type="submit" value="Change">
-    </form>
-
+    <div class="container" style="background-image: url('{% static "news/images/d.jpg" %}');">
+        <a class="back-button" href="{% url 'news:all_news' %}">Back</a>
+        <form class="change-news-form" action="{% url 'news:change_data_of_news' news_id %}" method="post">
+            {% csrf_token %}
+            <h1 class="change-news-heading">Change News</h1>
+            {{ news_change_form.as_p }}
+            
+            <button class="change-button" type="submit">Change News</button>
+        </form>
+    </div>
 {% endblock %}
-
-
-

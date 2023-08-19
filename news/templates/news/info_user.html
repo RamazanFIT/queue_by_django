@@ -1,0 +1,25 @@
+{% extends "news/base.html" %}
+
+{% block title %} 
+    User Information
+{% endblock %}
+
+{% block header %}
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'news/css/style_info_news.css' %}">
+{% endblock %}
+
+{% block content %} 
+    <div class="info-container">
+        <a href="{% url 'news:main' %}" class="back-link">&larr; Back</a>
+        <div class="user-info">
+            <h2 class="info-heading">User Information</h2>
+            <ul class="info-list">
+                <li class="info-item"><strong class="info-label">Name:</strong> {{ user.first_name }}</li>
+                <li class="info-item"><strong class="info-label">Surname:</strong> {{ user.last_name }}</li>
+                <li class="info-item"><strong class="info-label">Login:</strong> {{ user }}</li>
+                <li class="info-item"><strong class="info-label">Email:</strong> {{ user.email }}</li>
+            </ul>
+        </div>
+    </div>
+{% endblock %}

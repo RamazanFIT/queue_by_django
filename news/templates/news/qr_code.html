@@ -1,0 +1,28 @@
+{% extends "news/base.html" %}
+
+{% block header %}
+
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'news/css/style_for_QR.css' %}">
+
+{% endblock %}
+
+{% block title %} 
+
+<title> Chare QR CODE </title>
+
+{% endblock %}
+
+
+{% block head %}
+
+    <h1>Chare QR CODE</h1> 
+
+{% endblock %}
+
+
+{% block content %} 
+    <a href="{% url 'news:main' %}" class="back-link">&larr; Back</a>
+    <img src={% static "news/images/qr.svg" %} alt="QR CODE">
+
+{% endblock %}

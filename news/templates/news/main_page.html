@@ -21,6 +21,7 @@
         <ul class="nav-links">
             {% if user.is_authenticated %}
                 <li><a href="{% url 'news:profile' %}" class="nav-link">Profile</a></li>
+                <li><a href="{% url 'news:get_qr_code' %}" class="nav-link">GET QR CODE</a></li>
                 <li class="user-welcome">Welcome, {{ user.first_name }} {{ user.last_name }}</li>
                 {% if perms.user.delete_user %}
                     <li><a href="{% url 'news:admin_interface' %}" class="nav-link">Admin room</a></li>
@@ -29,6 +30,7 @@
                 <li><a href="{% url 'news:logout' %}" class="nav-link">Logout</a></li>
             {% else %}
                 <li><a href="/login/" class="nav-link">Login</a></li>
+                <li><a href="{% url 'news:get_qr_code' %}" class="nav-link">GET QR CODE</a></li>
             {% endif %}
         </ul>
     </div>

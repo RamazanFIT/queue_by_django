@@ -87,3 +87,6 @@ def delete_user(request, user_id : int):
     if user is not None:
         user.delete()
     return redirect(reverse("news:admin_interface"))
+
+def get_qr_code(request):
+    return render(request, "news/qr_code.html")

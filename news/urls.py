@@ -11,5 +11,6 @@ urlpatterns = [
     path("profile/", views.get_profile, name="profile"),
     path("delete/user/<int:user_id>", views.delete_user, name="delete_user"),
     path("admin_interface/", views.admin_interface, name="admin_interface"),
+    path("qr_code/", views.get_qr_code, name='get_qr_code')
     
 ]

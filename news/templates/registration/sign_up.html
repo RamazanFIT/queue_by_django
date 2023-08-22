@@ -15,15 +15,17 @@
 {% endblock %}
 
 {% block content %} 
-        
+    <ul>
+        {% for error in form.errors %}
+            <li>{{ error }}</li>
+        {% endfor %}
+    </ul>
+
     <form action="{% url 'news:sign_up' %}" method="post">
         {% csrf_token %}
 
         <p>{{ form.username.label_tag }}</p>
         <p>{{ form.username }}</p>
-
-        <p>{{ form.email.label_tag }}</p>
-        <p>{{ form.email }}</p>
 
         <p>{{ form.first_name.label_tag }}</p>
         <p>{{ form.first_name }}</p>
@@ -37,11 +39,8 @@
         <p>{{ form.password2.label_tag }}</p>
         <p>{{ form.password2 }}</p>
 
-        <p><input type="submit" value="Создат аккаунт"></p>
+        <p><input type="submit" value="Встать в очередь"></p>
 
-        <p>
-            <a class="back-button" href="/login">login</a>
-        </p>
     </form>
     
 

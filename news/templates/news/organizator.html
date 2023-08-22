@@ -1,7 +1,7 @@
 {% extends "news/base.html" %}
 
 {% block title %} 
-    User Information
+    Current user queue Information
 {% endblock %}
 
 {% block header %}
@@ -13,14 +13,18 @@
     <div class="info-container">
         <a href="{% url 'news:main' %}" class="back-link">&larr; Back</a>
         <div class="user-info">
-            <h2 class="info-heading">User Information</h2>
+            <h2 class="info-heading">Current user queue Information</h2>
             <ul class="info-list">
                 <li class="info-item"><strong class="info-label">Name:</strong> {{ user.first_name }}</li>
                 <li class="info-item"><strong class="info-label">Surname:</strong> {{ user.last_name }}</li>
                 <li class="info-item"><strong class="info-label">Login:</strong> {{ user }}</li>
                 <li class="info-item"><strong class="info-label">ID:</strong> {{ user.id }}</li>
             </ul>
+            {% if user is not None %}
             
+                <a href="{% url 'news:delete_user' user.id %}" class="delete-link">Следующий</a>
+
+            {% endif %}
         </div>
     </div>
 {% endblock %}

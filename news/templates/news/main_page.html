@@ -1,18 +1,19 @@
 {% extends "news/base.html" %}
 
 {% block title %} 
-    Information about News
+    QUEUE
 {% endblock %}
 
 {% block header %}
     {% load static %}
-    <link rel="stylesheet" type="text/css" href="{% static 'news/css/style.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'news/css/style1.css' %}">
+    
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 {% endblock %}
 
 {% block head %}
-    <h1 class="info-heading">Information about News</h1>
+    <h1 class="info-heading">QUEUE</h1>
 {% endblock %}
 
 {% block content %} 
@@ -21,12 +22,30 @@
             {% if user.is_authenticated %}
                 <li><a href="{% url 'news:profile' %}" class="nav-link">Profile</a></li>
                 <li class="user-welcome">Welcome, {{ user.first_name }} {{ user.last_name }}</li>
-                <li><a href="{% url 'news:interface_adding' %}" class="nav-link">Add News</a></li>
-                <li><a href="{% url 'news:all_news' %}" class="nav-link">News</a></li>
+                {% if perms.user.delete_user %}
+                    <li><a href="{% url 'news:admin_interface' %}" class="nav-link">Admin room</a></li>
+                {% endif %}
+                
                 <li><a href="{% url 'news:logout' %}" class="nav-link">Logout</a></li>
             {% else %}
                 <li><a href="/login/" class="nav-link">Login</a></li>
             {% endif %}
         </ul>
     </div>
+    <ul class="news-list">
+        {% for index, user_iterate in users %}
+            <li class="news-item">
+                <div class="news-content">
+                    <div class="queue-item {% if user_iterate == user %}highlighted{% endif %}">
+                        В очереди: {{ index|add:1 }} 
+                        {% if user_iterate == user %}
+                            <span class="highlighted-text">{{ user_iterate.first_name }} {{ user_iterate.last_name }}</span>
+                        {% else %}
+                            <span>{{ user_iterate.first_name }} {{ user_iterate.last_name }}</span>
+                        {% endif %}
+                    </div>
+                </div>
+            </li>
+        {% endfor %}
+    </ul>
 {% endblock %}

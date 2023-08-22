@@ -136,3 +136,5 @@ INTERNAL_IPS = [
 LOGIN_REDIRECT_URL = "/news/main_page"
 
 LOGOUT_REDIRECT_URL = "/login/"
+
+AUTH_USER_MODEL = 'news.CustomUser'

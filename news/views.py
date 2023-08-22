@@ -9,6 +9,12 @@ from django.views import View
 from django.utils.decorators import method_decorator
 from django.contrib.auth.decorators import login_required, permission_required
 from django.contrib.auth.models import Group, User
+from rest_framework.status import HTTP_200_OK
+from .serializers import NewsModelSerializer
+from rest_framework import mixins
+from rest_framework import generics
+from rest_framework.decorators import api_view
+from rest_framework.response import Response
 
 def get_info_about_new(request, news_id : int):
     if request.method == "GET":
@@ -120,3 +126,39 @@ def delete_news(request, news_id : int, user_id : int):
     if news.author_of_news == request.user or request.user.has_perm("news.delete_news"):
         news.delete()
     return redirect(reverse("news:all_news"))
+
+class NewsAddView(
+    mixins.CreateModelMixin,
+    generics.GenericAPIView
+):
+    queryset = News.objects.all()
+    serializer_class = NewsModelSerializer
+
+    def post(self, request, *args, **kwargs):
+        return self.create(request, *args, **kwargs)
+
+
+
+@api_view(["GET"])
+def get_news(request):
+    news = get_list_or_404(News)
+    serializer = NewsModelSerializer(news, many=True)
+    return Response(serializer.data)
+
+class NewsGetDeleteView(
+    mixins.RetrieveModelMixin,
+    mixins.DestroyModelMixin,
+    mixins.UpdateModelMixin,
+    generics.GenericAPIView
+):
+    queryset = News.objects.all()
+    serializer_class = NewsModelSerializer
+
+    def delete(self, request, *args, **kwargs):
+        return self.destroy(request, *args, **kwargs)
+
+    def get(self, request, *args, **kwargs):
+        return self.retrieve(request, *args, **kwargs)
+
+    def patch(self, request, *args, **kwargs):
+        return self.update(request, *args, **kwargs)
